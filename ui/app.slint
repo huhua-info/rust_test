@@ -1,0 +1,66 @@
+
+import {
+    Button,
+    VerticalBox,
+    HorizontalBox
+} from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    title: "Rust + Slint";
+    width: 450px;
+    height: 300px;
+    background: #f2f5fa;
+
+    in-out property <string> voltage: "0.000";
+
+    callback read-voltage();
+    callback reset-voltage();
+
+    VerticalBox {
+        padding: 25px;
+        spacing: 18px;
+        alignment: center;
+
+        Text {
+            text: "電壓監控系統";
+            font-size: 26px;
+            font-weight: 700;
+            horizontal-alignment: center;
+            color: #203050;
+        }
+
+        Text {
+            text: root.voltage + " V";
+            font-size: 44px;
+            font-weight: 700;
+            horizontal-alignment: center;
+            color: #1670c5;
+        }
+
+        Text {
+            text: "模擬量測";
+            font-size: 15px;
+            horizontal-alignment: center;
+            color: #64748b;
+        }
+
+        HorizontalBox {
+            spacing: 12px;
+
+            Button {
+                text: "讀取電壓";
+                primary: true;
+                clicked => {
+                    root.read-voltage();
+                }
+            }
+
+            Button {
+                text: "重設";
+                clicked => {
+                    root.reset-voltage();
+                }
+            }
+        }
+    }
+}
